@@ -29,9 +29,14 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - run: |
+          git status
+          git log -3
+          git pull
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
