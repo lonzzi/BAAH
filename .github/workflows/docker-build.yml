@@ -32,6 +32,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - run: git config --unset-all http.https://github.com/.extraheader
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -56,6 +57,8 @@ jobs:
             latest
             type=ref,event=tag
             ${{ github.event.inputs.tag }}
+
+    
 
       - name: Build and push Docker image
         id: push
